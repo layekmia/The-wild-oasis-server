@@ -1,6 +1,7 @@
 const { Types } = require("mongoose");
 const Booking = require("../model/booking");
 const Cabin = require("../model/cabin");
+const { eachDayOfInterval } = require("date-fns");
 
 exports.createBooking = async (req, res) => {
   try {
@@ -121,11 +122,110 @@ exports.getBooking = async (req, res) => {
     return res.status(200).json(booking);
   } catch (error) {
     console.error(error.message);
+    return res.status(400).json({
+      success: false,
+      message: error.message || "Internal server error",
+    });
+  }
+};
+
+exports.getBookedDates = async (req, res) => {
+  const cabinId = req.params.id;
+
+  if (!cabinId) {
     return res
       .status(400)
-      .json({
-        success: false,
-        message: error.message || "Internal server error",
-      });
+      .json({ success: false, message: "cabin id is required" });
+  } else if (!Types.ObjectId.isValid(cabinId)) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid booking id" });
+  }
+
+  try {
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+
+    const bookings = await Booking.find({
+      cabinId,
+      endDate: { $gte: today },
+      status: { $in: ["confirmed", "checked-in"] },
+    });
+
+    if (!bookings.length) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No booked date found" });
+    }
+
+    console.log(bookings);
+
+    const bookedDates = bookings
+      .map((booking) =>
+        eachDayOfInterval({
+          start: new Date(booking.startDate),
+          end: new Date(booking.endDate),
+        })
+      )
+      .flat();
+
+    return res.status(201).json(bookedDates);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "internal sever error" });
+  }
+};
+
+export const updateBooking = async (req, res) => {
+  const bookingId = req.params.id;
+  const updateData = req.body;
+
+  if (!bookingId || !mongoose.Types.ObjectId.isValid(bookingId)) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid bookingId" });
+  }
+
+  // Prevent updating certain fields
+  const allowedFields = [
+    "startDate",
+    "endDate",
+    "numGuests",
+    "numNights",
+    "cabinPrice",
+    "extraPrice",
+    "totalPrice",
+    "hasBreakfast",
+    "isPaid",
+    "status",
+    "observations",
+  ];
+  const filteredData = {};
+  allowedFields.forEach((field) => {
+    if (updateData[field] !== undefined)
+      filteredData[field] = updateData[field];
+  });
+
+  try {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      filteredData,
+      { new: true }
+    );
+
+    if (!updatedBooking) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Booking not found" });
+    }
+
+    return res.status(200).json({ booking: updatedBooking });
+  } catch (error) {
+    console.error("Error updating booking:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error while updating booking",
+    });
   }
 };

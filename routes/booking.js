@@ -3,12 +3,16 @@ const {
   getBookings,
   getBooking,
   createBooking,
+  getBookedDates,
+  updateBooking,
 } = require("../controller/booking.controller");
 
 const router = express.Router();
 
 router.post("/", createBooking);
 router.get("/", getBookings);
-router.get("/:bookingId", getBooking);
+router.get("/:id", getBooking);
+router.get("/:id/booked/dates", getBookedDates);
+router.patch("/:id/update", updateBooking);
 
 module.exports = router;
