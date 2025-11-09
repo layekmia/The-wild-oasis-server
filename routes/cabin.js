@@ -3,8 +3,8 @@ const { getCabins, getCabin, getCabinPrice } = require("../controller/cabin.cont
 
 const router = express.Router();
 
-// router.get("/", getCabins);
-// router.get("/:id", getCabin);
-// router.get("/:id/cabin/price", getCabinPrice);
+router.get("/", getCabins);
+router.get("/:id", getCabin);
+router.get("/:id/cabin/price", getCabinPrice);
 
 module.exports = router;

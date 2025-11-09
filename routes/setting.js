@@ -3,6 +3,6 @@ const { getSetting } = require("../controller/setting.controller");
 
 const router = express.Router();
 
-// router.get("/", getSetting);
+router.get("/", getSetting);
 
 module.exports = router;
