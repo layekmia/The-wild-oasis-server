@@ -34,10 +34,8 @@ app.get("/", (req, res) => {
   res.send("The Wild Oasis Website Backend is working");
 });
 
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT;
 
-// app.listen(PORT, () => {
-//   console.log(`Server running on port http://localhost:${PORT}`);
-// });
-
-module.export = app
+app.listen(PORT, () => {
+  console.log(`Server running on port http://localhost:${PORT}`);
+});
