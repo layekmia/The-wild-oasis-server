@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose")
 
 const cabinSchema = new Schema(
   {
@@ -12,5 +12,5 @@ const cabinSchema = new Schema(
   { timestamps: true }
 );
 
-const Cabin = model("Cabin", cabinSchema);
-export default Cabin;
+module.exports = model("Cabin", cabinSchema);
+

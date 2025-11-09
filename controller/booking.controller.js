@@ -91,8 +91,38 @@ exports.getBookings = async (req, res) => {
     return res.status(201).json(bookings);
   } catch (error) {
     console.error(error.message);
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Internal server error",
+    });
+  }
+};
+
+exports.getBooking = async (req, res) => {
+  const bookingId = req.params.id;
+
+  if (!bookingId) {
     return res
-      .status(500)
+      .status(400)
+      .json({ success: false, message: "booking id is required" });
+  } else if (!Types.ObjectId.isValid(bookingId)) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid booking id" });
+  }
+
+  try {
+    const booking = await Booking.findById(bookingId);
+    if (!booking)
+      return res
+        .status(400)
+        .json({ success: false, message: "booking not found" });
+
+    return res.status(200).json(booking);
+  } catch (error) {
+    console.error(error.message);
+    return res
+      .status(400)
       .json({
         success: false,
         message: error.message || "Internal server error",
