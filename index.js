@@ -7,6 +7,7 @@ const booking = require("./routes/booking");
 const cabin = require("./routes/cabin");
 const guest = require("./routes/guest");
 const setting = require("./routes/setting");
+const connectDB = require("./config/db");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(express.json());
 
+connectDB();
 
 const routes = [
   { path: "/api/bookings", router: booking },
