@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Cabin = require("../model/cabin");
 
 exports.getCabins = async (req, res) => {
