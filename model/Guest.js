@@ -11,12 +11,6 @@ const GuestSchema = new Schema(
   { timestamps: true }
 );
 
-let Guest;
-
-try {
-  Guest = mongoose.model("Guest");
-} catch {
-  Guest = mongoose.model("Guest", GuestSchema);
-}
+const Guest = models.Guest || model("Guest", GuestSchema);
 
 module.exports = Guest;
