@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Guest = require("../model/guest");
 
 exports.createGuest = async (req, res) => {
@@ -60,7 +59,7 @@ exports.updateGuest = async (req, res) => {
   const guestId = req.params.id;
   const updateData = req.body;
 
-  if (!guestId || !mongoose.Types.ObjectId.isValid(guestId)) {
+  if (!guestId) {
     return res
       .status(400)
       .json({ success: false, message: "Invalid or missing guest ID" });

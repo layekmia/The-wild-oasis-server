@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, models } = require("mongoose");
 
 const GuestSchema = new Schema(
   {
@@ -11,4 +11,4 @@ const GuestSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("Guest", GuestSchema);
+module.exports = models.Guest || model("Guest", GuestSchema);
