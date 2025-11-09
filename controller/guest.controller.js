@@ -1,3 +1,4 @@
+const connectDB = require("../config/db");
 const Guest = require("../model/guest");
 
 // exports.createGuest = async (req, res) => {
@@ -34,11 +35,13 @@ const Guest = require("../model/guest");
 
 exports.getGuest = async (req, res) => {
   const email = req.params.email;
-
   if (!email)
     return res.status(400).json({ success: false, message: "Invalid email" });
 
   try {
+
+    connectDB();
+
     const guest = await Guest.findOne({ email });
     if (!guest) {
       return res
