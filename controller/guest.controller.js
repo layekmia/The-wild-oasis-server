@@ -32,57 +32,57 @@ exports.createGuest = async (req, res) => {
   }
 };
 
-exports.getGuest = async (req, res) => {
-  const email = req.params.email;
+// exports.getGuest = async (req, res) => {
+//   const email = req.params.email;
 
-  if (!email)
-    return res.status(400).json({ success: false, message: "Invalid email" });
+//   if (!email)
+//     return res.status(400).json({ success: false, message: "Invalid email" });
 
-  try {
-    const guest = await Guest.findOne({ email });
-    if (!guest) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Guest not found" });
-    }
-    return res.status(201).json(guest);
-  } catch (error) {
-    console.error("Error in guest route:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error ",
-    });
-  }
-};
+//   try {
+//     const guest = await Guest.findOne({ email });
+//     if (!guest) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "Guest not found" });
+//     }
+//     return res.status(201).json(guest);
+//   } catch (error) {
+//     console.error("Error in guest route:", error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Internal server error ",
+//     });
+//   }
+// };
 
-exports.updateGuest = async (req, res) => {
-  const guestId = req.params.id;
-  const updateData = req.body;
+// exports.updateGuest = async (req, res) => {
+//   const guestId = req.params.id;
+//   const updateData = req.body;
 
-  if (!guestId) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Invalid or missing guest ID" });
-  }
+//   if (!guestId) {
+//     return res
+//       .status(400)
+//       .json({ success: false, message: "Invalid or missing guest ID" });
+//   }
 
-  try {
-    const updatedGuest = await Guest.findByIdAndUpdate(guestId, updateData, {
-      new: true, // return updated document
-      runValidators: true, // enforce schema validation on update
-    });
+//   try {
+//     const updatedGuest = await Guest.findByIdAndUpdate(guestId, updateData, {
+//       new: true, // return updated document
+//       runValidators: true, // enforce schema validation on update
+//     });
 
-    if (!updatedGuest) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Guest not found" });
-    }
+//     if (!updatedGuest) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Guest not found" });
+//     }
 
-    // 4️⃣ Return success response
-    return res.status(200).json(updatedGuest);
-  } catch (error) {
-    console.error("Error updating guest:", error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-};
+//     // 4️⃣ Return success response
+//     return res.status(200).json(updatedGuest);
+//   } catch (error) {
+//     console.error("Error updating guest:", error);
+//     return res
+//       .status(500)
+//       .json({ success: false, message: "Internal server error" });
+//   }
+// };
