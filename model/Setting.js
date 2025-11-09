@@ -9,4 +9,4 @@ const settingsSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = models.Setting || model("Settings", settingsSchema);
+module.exports = models.Setting || model("Setting", settingsSchema);
