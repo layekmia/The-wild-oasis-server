@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./config/db");
 require("dotenv").config();
 
 // All Routes
@@ -21,7 +20,6 @@ app.use(
 );
 app.use(express.json());
 
-connectDB();
 
 const routes = [
   { path: "/api/bookings", router: booking },
