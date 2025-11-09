@@ -1,4 +1,4 @@
-const Guest = require('../model/guest');
+import Guest from '../model/guest.js';
 
 // exports.createGuest = async (req, res) => {
 //   const { fullName, email } = req.body;
@@ -32,7 +32,7 @@ const Guest = require('../model/guest');
 //   }
 // };
 
-exports.getGuest = async (req, res) => {
+export const getGuest = async (req, res) => {
   const guest = await Guest.find();
   res.status(2001).json(guest);
   // const email = req.params.email;

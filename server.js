@@ -1,16 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import connectDB from "./config/db.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 // All Routes
-const booking = require("./routes/booking");
-const cabin = require("./routes/cabin");
-const guest = require("./routes/guest");
-const setting = require("./routes/setting");
+// const booking = require("./routes/booking");
+// const cabin = require("./routes/cabin");
+import guest from "./routes/guest.js";
+import setting from "./routes/setting.js"; 
 
 const app = express();
-
+ 
 app.use(
   cors({
     origin: ["http://localhost:3000"], // allow only my front-end
@@ -26,8 +27,8 @@ connectDB();
 const PORT = process.env.PORT || 3000;
 
 const routes = [
-  { path: "/api/bookings", router: booking },
-  { path: "/api/cabins", router: cabin },
+  // { path: "/api/bookings", router: booking },
+  // { path: "/api/cabins", router: cabin },
   { path: "/api/guests", router: guest },
   { path: "/api/settings", router: setting },
 ];
@@ -42,4 +43,4 @@ app.listen(PORT, () => {
   console.log("server running on port ..");
 });
 
-module.exports = app;
+export default app;

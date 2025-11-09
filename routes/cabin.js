@@ -1,10 +1,10 @@
-const express = require("express");
-// const { getCabins, getCabin, getCabinPrice } = require("../controller/cabin.controller");
+// const express = require("express");
+// // const { getCabins, getCabin, getCabinPrice } = require("../controller/cabin.controller");
 
-const router = express.Router();
+// const router = express.Router();
 
-// router.get("/", getCabins);
-// router.get("/:id", getCabin);
-// router.get("/:id/cabin/price", getCabinPrice);
+// // router.get("/", getCabins);
+// // router.get("/:id", getCabin);
+// // router.get("/:id/cabin/price", getCabinPrice);
 
-module.exports = router;
+// module.exports = router;

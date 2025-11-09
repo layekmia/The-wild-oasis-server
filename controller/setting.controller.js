@@ -1,6 +1,6 @@
-const Setting = require("../model/Setting");
+import Setting from "../model/Setting.js";
 
-exports.getSetting = async (req, res) => {
+export const getSetting = async (req, res) => {
   try {
     const setting = await Setting.find();
     if (!setting)

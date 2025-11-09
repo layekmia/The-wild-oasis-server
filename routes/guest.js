@@ -1,5 +1,5 @@
-const express = require("express");
-const { getGuest } = require("../controller/guest.controller");
+import express from "express";
+import { getGuest } from "../controller/guest.controller.js";
 // const { getGuest } = require("../controller/guest.controller");
 
 const router = express.Router();
@@ -9,4 +9,4 @@ const router = express.Router();
 // router.patch('/:id/update', updateGuest);
 router.get('/', getGuest)
 
-module.exports = router;
+export default router;
