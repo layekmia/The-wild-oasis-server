@@ -21,21 +21,23 @@ app.use(express.json());
 
 connectDB();
 
-// const routes = [
-//   { path: "/api/bookings", router: booking },
-//   { path: "/api/cabins", router: cabin },
-//   { path: "/api/guests", router: guest },
-//   { path: "/api/settings", router: setting },
-// ];
+const routes = [
+  { path: "/api/bookings", router: booking },
+  { path: "/api/cabins", router: cabin },
+  { path: "/api/guests", router: guest },
+  { path: "/api/settings", router: setting },
+];
 
-// routes.forEach(({ path, router }) => app.use(path, router));
+routes.forEach(({ path, router }) => app.use(path, router));
 
 app.get("/", (req, res) => {
   res.send("The Wild Oasis Website Backend is working");
 });
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port http://localhost:${PORT}`);
+// });
+
+module.export = app
