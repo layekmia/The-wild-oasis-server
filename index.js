@@ -4,9 +4,9 @@ const connectDB = require("./config/db");
 require("dotenv").config();
 
 // All Routes
-// const booking = require("./routes/booking");
-// const cabin = require("./routes/cabin");
-// const guest = require("./routes/guest");
+const booking = require("./routes/booking");
+const cabin = require("./routes/cabin");
+const guest = require("./routes/guest");
 const setting = require("./routes/setting");
 
 const app = express();
