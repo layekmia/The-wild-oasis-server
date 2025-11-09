@@ -34,28 +34,29 @@ const Guest = require("../model/guest");
 // };
 
 exports.getGuest = async (req, res) => {
-  const email = req.params.email;
-  if (!email)
-    return res.status(400).json({ success: false, message: "Invalid email" });
+  res.send('Hi')
+  // const email = req.params.email;
+  // if (!email)
+  //   return res.status(400).json({ success: false, message: "Invalid email" });
 
-  try {
+  // try {
 
-    connectDB();
+  //   connectDB();
 
-    const guest = await Guest.findOne({ email });
-    if (!guest) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Guest not found" });
-    }
-    return res.status(201).json(guest);
-  } catch (error) {
-    console.error("Error in guest route:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error ",
-    });
-  }
+  //   const guest = await Guest.findOne({ email });
+  //   if (!guest) {
+  //     return res
+  //       .status(400)
+  //       .json({ success: false, message: "Guest not found" });
+  //   }
+  //   return res.status(201).json(guest);
+  // } catch (error) {
+  //   console.error("Error in guest route:", error);
+  //   return res.status(500).json({
+  //     success: false,
+  //     message: "Internal server error ",
+  //   });
+  // }
 };
 
 // exports.updateGuest = async (req, res) => {
