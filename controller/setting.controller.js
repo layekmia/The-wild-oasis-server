@@ -13,6 +13,6 @@ exports.getSetting = async (req, res) => {
     console.log(error.message);
     return res
       .status(500)
-      .json({ success: false, message: "Internal server error" });
+      .json({ success: false, message: error.message || "Internal server error" });
   }
 };
