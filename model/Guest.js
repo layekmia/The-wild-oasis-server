@@ -1,6 +1,6 @@
 const { Schema, model, models } = require("mongoose");
 
-const GuestSchema = new Schema(
+const guestSchema = new Schema(
   {
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -11,6 +11,4 @@ const GuestSchema = new Schema(
   { timestamps: true }
 );
 
-const Guest = models.Guest || model("Guest", GuestSchema);
-
-module.exports = Guest;
+module.exports = models.Guest || model("Guest", guestSchema);
