@@ -229,3 +229,30 @@ exports.updateBooking = async (req, res) => {
     });
   }
 };
+
+exports.deleteBooking = async (req, res) => {
+  const id = req.params.id;
+
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid or missing booking ID" });
+  }
+
+  try {
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+
+    if (!deletedBooking) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Booking not found" });
+    }
+
+    return res.status(200).json(deletedBooking);
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+};
