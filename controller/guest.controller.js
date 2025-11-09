@@ -33,7 +33,8 @@ const Guest = require("../model/guest");
 // };
 
 exports.getGuest = async (req, res) => {
-  res.status(2001).json({message: "hi"})
+  const guest = await Guest.find();
+  res.status(2001).json(guest);
   // const email = req.params.email;
   // if (!email)
   //   return res.status(400).json({ success: false, message: "Invalid email" });
